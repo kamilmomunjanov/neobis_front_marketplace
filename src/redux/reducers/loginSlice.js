@@ -1,15 +1,16 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import instance from "../../axios";
-import {authUserData} from "./authSlice";
+
+
 
 
 export const loginUserData = createAsyncThunk(
     "post/loginUserData",
-    async ({username,password}, {rejectWithValue}) => {
+    async ({username, password}, {rejectWithValue}) => {
         try {
             const response = await instance.post("login/",{
-                username,
-                password
+                username: username,
+                password: password
             })
 
             console.log(response)
@@ -32,23 +33,25 @@ const loginSlice = createSlice({
         error:"",
     },
     reducers:{
-        authPost:()=>{}
     },
     extraReducers: (builder) => {
         builder
-            .addCase(authUserData.pending, (state, action) => {
+            .addCase(loginUserData.pending, (state, action) => {
                 state.status = "loading"
                 state.error = ""
             })
-            .addCase(authUserData.fulfilled, (state, action) => {
+            .addCase(loginUserData.fulfilled, (state, action) => {
                 state.status = "done"
                 state.data = action.payload
             })
-            .addCase(authUserData.rejected, (state, action) => {
+            .addCase(loginUserData.rejected, (state, action) => {
                 state.status = "error"
                 state.error = action.payload
             })
     }
 })
 
+
+
+export const {} = loginSlice.actions;
 export default  loginSlice.reducer;

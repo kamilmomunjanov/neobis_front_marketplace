@@ -53,7 +53,7 @@ const authSlice = createSlice({
 })
 
 
-export const selectIsAuth = state => Boolean(state.data)
+
 export const authSliceSelector = state => state.authSlice
 export const {authPost} = authSlice.actions;
 export default  authSlice.reducer;

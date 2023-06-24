@@ -1,0 +1,120 @@
+
+.loginPage{
+    display: flex;
+}
+
+
+.loginPage__right{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.title{
+    position: absolute;
+    top: 42px;
+    width: 335px;
+    display: flex;
+    justify-content: center;
+    column-gap: 6px;
+    align-items: center;
+    margin: 0 auto;
+    padding: 10px;
+    border-radius: 16px;
+    background: #F34545;
+}
+
+.title__errorMessage{
+    color: #FFF;
+    font-size: 16px;
+    font-family: Gotham Pro, sans-serif;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    width: 335px;
+}
+
+.form__label-input{
+    color:  #C0C0C0;
+    font-size: 16px;
+    font-family: Gotham Pro, sans-serif;
+    padding: 10px 0;
+    width: 100%;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid grey;
+}
+
+.form__label-input::-webkit-input-placeholder       {text-indent: 0;   transition: text-indent 0.3s ease;}
+.form__label-input:focus::-webkit-input-placeholder {text-indent: 500px; transition: text-indent 0.3s ease;}
+
+
+
+.form__label-field{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.password{
+    position: relative;
+    margin: 70px 0 100px 0;
+}
+
+.form__label-icon{
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+}
+
+.form__btn{
+    color: white;
+    font-size: 16px;
+    font-family: Gotham Pro, sans-serif;
+    font-weight: 700;
+    padding: 10px 0;
+    border-radius: 80px;
+    background: #C0C0C0;
+    border: none;
+    cursor: pointer;
+}
+
+.register__btn{
+    color: #5458EA;
+    font-size: 14px;
+    font-family: Gotham Pro, sans-serif;
+    line-height: 120%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.form__label{
+    position: relative;
+}
+
+.register__label-error-user{
+    position: absolute;
+    top: 40px;
+    color: red;
+    font-size: 16px;
+    font-family: Gotham Pro, sans-serif;
+}
+
+.register__label-error{
+    position: absolute;
+    bottom:80px;
+    color: red;
+    font-size: 16px;
+    font-family: Gotham Pro, sans-serif;
+}
+
+
+
+.error__password{
+    margin-bottom: -30px;
+    margin-top: 80px;
+}
