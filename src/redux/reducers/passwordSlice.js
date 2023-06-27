@@ -1,16 +1,15 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import instance from "../../axios";
-import {authUserData} from "./authSlice";
 
 
 export const passwordRegister = createAsyncThunk(
     "put/passwordRegister",
-    async ({password1,password2, id}, {rejectWithValue}) => {
+    async ({password1, password2}, {rejectWithValue}) => {
         try {
-            const response = await instance.put(`/${id}/set_password/`,{
-                password1,
-                password2,
-
+            const response = await instance.put(`/21/set_password/`, {
+                    password1,
+                    password2,
+                // headers: { Authorization: 'Bearer ' +  window.localStorage.getItem("token") }
             })
             console.log(response)
 
@@ -19,7 +18,7 @@ export const passwordRegister = createAsyncThunk(
             }
             return response.data
 
-        }catch (err) {
+        } catch (err) {
             return rejectWithValue(err.message)
         }
     }
@@ -27,14 +26,15 @@ export const passwordRegister = createAsyncThunk(
 
 
 const passwordSlice = createSlice({
-    name:"password",
-    initialState:{
-        data:null,
-        status:"",
-        error:"",
+    name: "password",
+    initialState: {
+        data: null,
+        status: "",
+        error: "",
     },
-    reducers:{
-        authPost:()=>{}
+    reducers: {
+        authPost: () => {
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -54,4 +54,4 @@ const passwordSlice = createSlice({
 })
 
 
-export default  passwordSlice.reducer;
+export default passwordSlice.reducer;

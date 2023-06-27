@@ -32,7 +32,7 @@ const Register = () => {
 
 
     const arrowReturn = () => {
-        return navigate("/")
+        return navigate(-1)
             }
 
 
@@ -107,7 +107,7 @@ const Register = () => {
 
                         </label>
 
-                        <button type="submit" className={styles.form__btn}>Далее</button>
+                        <button onClick={()=>navigate("/password")} type="submit" className={styles.form__btn}>Далее</button>
                     </form>
                 </div>
             </div>
