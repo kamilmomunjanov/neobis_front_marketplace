@@ -4,11 +4,11 @@ import instance from "../../axios";
 
 export const authUserData = createAsyncThunk(
     "posts/authUserData",
-    async ({email, userName,}, {rejectWithValue}) => {
+    async ({email, username,}, {rejectWithValue}) => {
         try {
             const response = await instance.post("register/",{
                 email:email,
-                username:userName
+                username:username
             })
             console.log(response)
 

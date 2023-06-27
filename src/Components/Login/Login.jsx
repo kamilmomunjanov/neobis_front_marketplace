@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import logo from "../../images/loginPageLeft.png";
 import {useForm} from "react-hook-form";
-import {Navigate} from "react-router-dom";
+import {Navigate, Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import  {loginUserData} from "../../redux/reducers/loginSlice";
 
@@ -33,7 +33,6 @@ const Login = () => {
         const dataLogin = dispatch(loginUserData({username, password}))
         if ("token" in dataLogin) {
                     window.localStorage.setItem("token", data.token)
-     
                 }else if(!data){
                     return alert("Не удалось авторизоваться")
                 }
@@ -55,7 +54,7 @@ const Login = () => {
     return (
         <div className="loginPage">
             <div className="loginPage__left">
-                <img style={{width: "720px", height: "100%"}} src={logo} alt="Logo"/>
+                <img style={{width: "720px", height: "100vh"}} src={logo} alt="Logo"/>
             </div>
             <div className="loginPage__right">
                 {
@@ -69,7 +68,7 @@ const Login = () => {
                 <form noValidate onSubmit={handleSubmit(handleSubmitLogin)} className="form">
                     <label className="form__label">
                         <p className="register__label-error-user">
-                            {errors.user_name && errors.user_name?.message}
+                            {errors.username && errors.username?.message}
                         </p>
                         <input {...register("username", {
                             required: {
@@ -120,7 +119,7 @@ const Login = () => {
                     <button type="submit" className="form__btn">Войти</button>
                 </form>
 
-                <p className="register__btn">Зарегистрироваться</p>
+                <Link to="/register" className="register__btn">Зарегистрироваться</Link>
             </div>
         </div>
     );

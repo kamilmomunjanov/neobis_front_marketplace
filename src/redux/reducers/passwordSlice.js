@@ -5,11 +5,12 @@ import {authUserData} from "./authSlice";
 
 export const passwordRegister = createAsyncThunk(
     "put/passwordRegister",
-    async ({password1,password2}, {rejectWithValue}) => {
+    async ({password1,password2, id}, {rejectWithValue}) => {
         try {
-            const response = await instance.put(`/20/set_password/`,{
+            const response = await instance.put(`/${id}/set_password/`,{
                 password1,
-                password2
+                password2,
+
             })
             console.log(response)
 
