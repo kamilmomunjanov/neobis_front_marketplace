@@ -1,0 +1,73 @@
+.tabBar{
+    display: flex;
+    flex-direction: column;
+    padding: 30px 42px 0 42px;
+    width: 500px;
+    height: 100vh;
+    background-color: wheat;
+}
+
+.tab__user{
+    border-radius: 100px;
+    background: #5458EA;
+    width: 60px;
+    height: 60px;
+}
+
+.tab__userInfo{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.tab__userTitle{
+    color: #494949;
+    text-align: center;
+    font-size: 18px;
+    font-family: Gotham Pro, sans-serif;
+    line-height: 24px;
+}
+
+.tab__userSubTitle{
+    color: #494949;
+    text-align: center;
+    font-size: 18px;
+    font-family: Gotham Pro, sans-serif;
+    line-height: 24px;
+}
+
+
+.tab__store, .tab__logout{
+    border-radius: 6px;
+    background: #5458EA;
+    width: 30px;
+    height: 30px;
+}
+
+.tab__profile{
+    display: flex;
+    align-items: center;
+    column-gap: 12px;
+    margin-bottom: 40px;
+    cursor: pointer;
+}
+
+.tab__aside{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+.tab__asideText{
+    display: flex;
+    align-items: center;
+    column-gap: 9px;
+    margin-bottom: 20px;
+}
+
+.tab__text{
+    color: #494949;
+    font-size: 16px;
+    font-family: Gotham Pro, sans-serif;
+    line-height: 24px;
+}

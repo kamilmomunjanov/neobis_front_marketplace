@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import logo from "../../images/loginPageLeft.png";
 import {useForm} from "react-hook-form";
-import {Navigate, Link} from "react-router-dom";
+import {useNavigate, Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import  {loginUserData} from "../../redux/reducers/loginSlice";
 
@@ -11,6 +11,7 @@ const Login = () => {
 
     const [passwordView, setPasswordView] = useState(false)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const {data, status, error} = useSelector((store) => store.loginSlice)
 
@@ -48,7 +49,7 @@ const Login = () => {
     //     return <Navigate to='/'/>
     // }
     if (status === 'done') {
-        alert('done')
+        return navigate("/profile")
     }
 
     return (
@@ -116,7 +117,7 @@ const Login = () => {
 
                     </label>
 
-                    <button type="submit" className="form__btn">Войти</button>
+                    <button  type="submit" className="form__btn">Войти</button>
                 </form>
 
                 <Link to="/register" className="register__btn">Зарегистрироваться</Link>
