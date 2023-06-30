@@ -1,13 +1,16 @@
-import React from 'react';
+import React,{useState} from 'react';
 import styles from "./Profile.module.css";
 import Layout from "../Layout/Layout";
 import {useForm} from "react-hook-form";
-import {useLocation, useNavigate} from "react-router-dom";
+import {useLocation, useNavigate, Link} from "react-router-dom";
 import {useDispatch} from "react-redux";
+import InputMask from "react-input-mask";
+import TelNumberModal from "./TelNumberModal";
 
 
 const Profile = () => {
 
+    const [modal, setModal] = useState(false)
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const location = useLocation()
@@ -33,59 +36,133 @@ const Profile = () => {
         <div className={styles.profilePage}>
             <Layout/>
             <div className={styles.loginPage__right}>
-                <div className={styles.top}>
-                    <div className={styles.top__arrowReturn} onClick={arrowReturn}>
-                        <svg className={styles.top__arrow} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10 8L6 12M6 12L10 16M6 12L18 12" stroke="#1D1D1F" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                        <p className={styles.top__text}>Назад</p>
-                    </div>
-                    <h2 className={styles.title__register}>Регистрация</h2>
-                </div>
 
                 <form noValidate className={styles.form}>
+                    <div className={styles.top}>
+                        <div className={styles.top__arrowReturn} onClick={arrowReturn}>
+                            <svg className={styles.top__arrow} width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10 8L6 12M6 12L10 16M6 12L18 12" stroke="#1D1D1F" strokeWidth="1.5"
+                                      strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                            <p className={styles.top__text}>Назад</p>
+                        </div>
+                        <h2 className={styles.title__register}>Профиль</h2>
+                    </div>
                     <div className={styles.instruction}>
-                        <svg className={styles.instructionSvg}  width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fillRule="evenodd" clipRule="evenodd" d="M17.5 13.5C17.5 9.91015 20.4101 7 24 7C27.5899 7 30.5 9.91015 30.5 13.5V16H17.5V13.5ZM14.5 16.1404V13.5C14.5 8.25329 18.7533 4 24 4C29.2467 4 33.5 8.2533 33.5 13.5V16.1404C37.2013 16.8425 40 20.0944 40 24V36C40 40.4183 36.4183 44 32 44H16C11.5817 44 8 40.4183 8 36V24C8 20.0944 10.7987 16.8425 14.5 16.1404ZM24 26.5C24.8284 26.5 25.5 27.1716 25.5 28V32C25.5 32.8284 24.8284 33.5 24 33.5C23.1716 33.5 22.5 32.8284 22.5 32V28C22.5 27.1716 23.1716 26.5 24 26.5Z" fill="white" fillOpacity="0.5"/>
+                        <svg className={styles.instructionSvg} width="80" height="80" viewBox="0 0 44 44" fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <g id="Huge-icon/user/solid/user">
+                                <g id="user">
+                                    <path id="combo shape" fillRule="evenodd" clipRule="evenodd"
+                                          d="M22.0001 20.1667C26.0502 20.1667 29.3334 16.8834 29.3334 12.8333C29.3334 8.78325 26.0502 5.5 22.0001 5.5C17.95 5.5 14.6667 8.78325 14.6667 12.8333C14.6667 16.8834 17.95 20.1667 22.0001 20.1667ZM22.0001 38.5C29.0877 38.5 34.8334 35.2168 34.8334 31.1667C34.8334 27.1166 29.0877 23.8333 22.0001 23.8333C14.9124 23.8333 9.16675 27.1166 9.16675 31.1667C9.16675 35.2168 14.9124 38.5 22.0001 38.5Z"
+                                          fill="white"/>
+                                </g>
+                            </g>
                         </svg>
 
-                        {
-                            location.pathname === "/password/repeat"
-                                ? <h3 className={styles.instructionTitle}>Повторите пароль</h3>
-                                : <h3 className={styles.instructionTitle}>Придумайте пароль</h3>
-                        }
-                        <p className={styles.instructionSubTitle}>
-                            Минимальная длина — 8 символов. Для надежности пароль должен содержать буквы и цифры.
-                        </p>
+                        <h3 className={styles.instructionTitle}>Выбрать фотографию</h3>
                     </div>
                     <label className={styles.form__label}>
+                        <input {...register("first_name", {
+                            required: {
+                                message: "Имя обязательно к заполнению",
+                                value: true
+                            },
+                            minLength: {
+                                message: "Минимум 2 символа",
+                                value: 2
+                            },
+                            pattern: {
+                                message: "Напишите правильно своё имя",
+                                value: /^[а-яА-ЯёЁa-zA-Z]+$/
+                            }
+                        })} className={styles.form__labelInput} type="text" placeholder="Имя"/>
                         <p className={`${styles.register__labelError} ${styles.error__password}`}>
-                            {errors.password && errors.password?.message}
+                            {errors.first_name && errors.first_name?.message}
                         </p>
-                        <div className={`${styles.form__labelField} ${styles.password}`}>
-                            <input {...register("password", {
+                    </label>
+
+                    <label className={styles.form__label}>
+                        <input {...register("last_name", {
+                            required: {
+                                message: "Фамилия обязательна к заполнению",
+                                value: true
+                            },
+                            minLength: {
+                                message: "Минимум 2 символа",
+                                value: 2
+                            },
+                            pattern: {
+                                message: "Напишите правильно своё имя",
+                                value: /^[а-яА-ЯёЁa-zA-Z]+$/
+                            }
+                        })} className={styles.form__labelInput} type="text" placeholder="Фамилия"/>
+                        <p className={`${styles.register__labelError} ${styles.error__password}`}>
+                            {errors.last_name && errors.last_name?.message}
+                        </p>
+                    </label>
+
+                    <label className={styles.form__label}>
+                        <p className={`${styles.register__labelError} ${styles.error__password}`}>
+                            {errors.username && errors.username?.message}
+                        </p>
+                        <input className={styles.form__labelInput} type="text" placeholder="Имя пользователя"/>
+
+                    </label>
+
+                    <label className={styles.form__label}>
+                        <p className={`${styles.register__labelError} ${styles.error__password}`}>
+                            {errors.birthday && errors.birthday?.message}
+                        </p>
+                        <input {...register("birthday", {
+                            required: {
+                                message: "Напишите дату рождения",
+                                value: true
+                            },
+                            pattern: {
+                                message: "Напишите правильно свою дату рождения",
+                                value: /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/
+                            }
+                        })} className={styles.form__labelInput} type="date" placeholder="Дата рождения"/>
+
+                    </label>
+
+                    <Link onClick={()=>setModal(true)} className={styles.form__telInput}>Добавьте номер</Link>
+
+                    <TelNumberModal modal={modal} setModal={setModal}>
+                        <h4 className={styles.modal__title}>Изменить номер телефона</h4>
+                        <svg className={styles.modal__svg} width="60" height="60" viewBox="0 0 49 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M42.5 38V34.7081C42.5 33.0725 41.5042 31.6017 39.9856 30.9942L35.9173 29.3669C33.9857 28.5943 31.7844 29.4312 30.854 31.292L30.5 32C30.5 32 25.5 31 21.5 27C17.5 23 16.5 18 16.5 18L17.208 17.646C19.0688 16.7156 19.9057 14.5143 19.1331 12.5827L17.5058 8.51444C16.8983 6.99581 15.4275 6 13.7919 6H10.5C8.29086 6 6.5 7.79086 6.5 10C6.5 27.6731 20.8269 42 38.5 42C40.7091 42 42.5 40.2091 42.5 38Z" fill="white" fillOpacity="0.5" stroke="white" strokeOpacity="0.7" strokeLinejoin="round"/>
+                        </svg>
+                        <p className={styles.modal__subtitle}>Введите номер телефона</p>
+                        <span className={styles.modal__text}>Мы отправим вам СМС с кодом подтверждения</span>
+
+                        <label className={styles.form__label}>
+                            <p className={`${styles.register__labelError} ${styles.error__password} ${styles.email__error}`}>
+                                {errors.phone && errors.phone?.message}
+                            </p>
+                            <InputMask mask={`+\\9\\96(999)99-99-99`} {...register("phone", {
                                 required: {
-                                    message: "Пароль обязателен к заполнению",
+                                    message: "Это поле обязательно",
                                     value: true
                                 },
                                 pattern: {
-                                    message: "Пароль должен содержать не менее 8 символов, заглавную букву, число",
-                                    value: /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}/g
+                                    message: "Заполните номер телефона",
+                                    value: /^\+996\(\d{3}\)\d{2}-\d{2}-\d{2}$/
                                 }
-                            })} className={styles.form__labelInput}  placeholder="Пароль"/>
+                            })} className={`${styles.form__labelInput} ${styles.phone}`} type="tel" placeholder="0(000) 000 000"/>
 
-                            <span  className="form__label-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path fillRule="evenodd" clipRule="evenodd"
-                                      d="M3.46967 4.53033C3.17678 4.23744 3.17678 3.76256 3.46967 3.46967C3.76256 3.17678 4.23744 3.17678 4.53033 3.46967L20.5303 19.4697C20.8232 19.7626 20.8232 20.2374 20.5303 20.5303C20.2374 20.8232 19.7626 20.8232 19.4697 20.5303L16.6429 17.7036C15.2337 18.4709 13.66 19 12 19C8.18448 19 4.82549 16.2047 2.86971 14.1469C1.7101 12.9268 1.7101 11.0732 2.86971 9.8531C3.69953 8.98001 4.78196 7.97414 6.04468 7.10534L3.46967 4.53033ZM9.41536 10.476C9.15145 10.9227 9 11.4436 9 12C9 13.6569 10.3431 15 12 15C12.5564 15 13.0773 14.8486 13.524 14.5846L9.41536 10.476ZM12 5C15.8155 5 19.1745 7.79533 21.1303 9.8531C22.2899 11.0732 22.2899 12.9268 21.1303 14.1469C20.6902 14.6099 20.1791 15.1103 19.6078 15.6077L9.4127 5.41264C10.2422 5.15256 11.1086 5 12 5Z"
-                                      fill="#C0C0C0"/>
-                            </svg>
-                        </span>
-                        </div>
+                        </label>
+                        </TelNumberModal>
+
+                    <label className={styles.form__label}>
+                        <input className={`${styles.form__labelInput} ${styles.email}`} type="email" placeholder="Электронная почта"/>
                     </label>
 
-                    <button onClick={()=>navigate("/password/repeat")} type="submit" className={styles.form__btn}>Далее</button>
+                    <button type="submit"
+                            className={styles.form__btn}>Далее
+                    </button>
                 </form>
             </div>
         </div>

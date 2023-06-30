@@ -4,6 +4,7 @@ import axios from "axios";
 // const token = window.localStorage.getItem("token")
 const instance = axios.create({
     baseURL:"http://68.183.79.205:8000/"
+    // headers: { Authorization: 'Bearer ' +  window.localStorage.getItem("token") }
 })
 
 instance.interceptors.request.use((config) => {
