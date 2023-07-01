@@ -13,11 +13,15 @@ export const loginUserData = createAsyncThunk(
                 password: password
             })
 
-            console.log(response)
+
+            console.log(response.data.token)
             if (response.statusText !== "OK") {
                 throw new Error("Ошибка при запросе")
             }
-            return response.data
+            return  [window.localStorage.setItem("token", response.data.token.access),
+                window.localStorage.setItem("tokenRefresh", response.data.token.refresh), response.data ]
+
+
         }catch (err) {
             return rejectWithValue(err.message)
         }

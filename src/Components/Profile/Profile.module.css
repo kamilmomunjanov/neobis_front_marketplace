@@ -19,8 +19,10 @@
 }
 
 .form__labelInput{
-    color:  #C0C0C0;
+    color: #000;
     font-size: 16px;
+    font-weight: bold;
+    line-height: 24px;
     font-family: Gotham Pro, sans-serif;
     padding: 10px 0 10px 10px;
     width: 100%;
@@ -44,6 +46,10 @@
     background-color: white;
 }
 
+.form__labelInput::-webkit-input-placeholder{
+    font-size: 16px;
+    line-height: 24px;
+    font-family: Gotham Pro, sans-serif;}
 .form__labelInput::-webkit-input-placeholder       {text-indent: 0;   transition: text-indent 0.3s ease;}
 .form__labelInput:focus::-webkit-input-placeholder {text-indent: 1000px; transition: text-indent 0.3s ease;}
 

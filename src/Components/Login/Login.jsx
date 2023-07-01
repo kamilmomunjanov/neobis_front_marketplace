@@ -34,9 +34,9 @@ const Login = () => {
         const password = data.password
         const dataLogin = dispatch(loginUserData({username, password}))
         if ("token" in dataLogin) {
-                    window.localStorage.setItem("token", data.token)
-                }else if(!data){
-                    return alert("Не удалось авторизоваться")
+            window.localStorage.setItem("token", data.token)
+        }else if(!data){
+                    return console.log("Не удалось авторизоваться")
                 }
     }
 

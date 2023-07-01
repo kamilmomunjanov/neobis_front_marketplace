@@ -1,12 +1,25 @@
 import React from 'react';
-import styles from "./Profile.module.css";
-import InputMask from "react-input-mask";
+import {useDispatch, useSelector} from "react-redux";
 import "./modal.css";
+import {phoneVerify} from "../../redux/reducers/phoneVerify";
 
-const TelNumberModal = ({register, errors, modal, setModal, children}) => {
+const TelNumberModal = ({modal, setModal, handleSubmit, children}) => {
+
+    const {data, status, error} = useSelector((store) => store.phoneSlice)
+    const dispatch = useDispatch()
+
+    const handleSubmitPhone = (data) =>{
+        data.preventDefault()
+        const phone_number = data.phone
+        const code = "stri"
+        dispatch(phoneVerify({phone_number, code}))
+    }
+
+
+
     return (
         <div className={modal ? "modal active" : "modal"} onClick={()=>setModal(false)}>
-            <form className={modal ? "modal__content active" : "modal__content"} onClick={e=>e.stopPropagation()}>
+            <form onSubmit={handleSubmit(handleSubmitPhone)} className={modal ? "modal__content active" : "modal__content"} onClick={e=>e.stopPropagation()}>
                 {children}
             </form>
         </div>

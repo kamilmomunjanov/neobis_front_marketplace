@@ -6,7 +6,7 @@ export const passwordRegister = createAsyncThunk(
     "put/passwordRegister",
     async ({password1, password2}, {rejectWithValue}) => {
         try {
-            const response = await instance.put(`/21/set_password/`, {
+            const response = await instance.put(`/30/set_password/`, {
                     password1,
                     password2,
                 // headers: { Authorization: 'Bearer ' +  window.localStorage.getItem("token") }

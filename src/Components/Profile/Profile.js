@@ -1,11 +1,14 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import styles from "./Profile.module.css";
 import Layout from "../Layout/Layout";
 import {useForm} from "react-hook-form";
 import {useLocation, useNavigate, Link} from "react-router-dom";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import InputMask from "react-input-mask";
 import TelNumberModal from "./TelNumberModal";
+import {formPutUSerData, formUserData} from "../../redux/reducers/formGetDataUser";
+import axios from "axios";
+import {loginUserData} from "../../redux/reducers/loginSlice";
 
 
 const Profile = () => {
@@ -14,6 +17,7 @@ const Profile = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const location = useLocation()
+    const {data, status, error} = useSelector((store) => store.formSlice)
     const {
         register,
         handleSubmit,
@@ -26,18 +30,43 @@ const Profile = () => {
         mode: "onChange"
     })
 
+    useEffect(()=>{
+        dispatch(formUserData())
+    },[])
+
+    // useEffect(()=>{
+    //     axios("http://68.183.79.205:8000/form/",{
+    //         headers: { Authorization: 'Bearer ' +  window.localStorage.getItem("token") }
+    //     }).then((res) => console.log(res.data))
+    // },[])
+
+    const handleSubmitForm = (data) => {
+        console.log(data)
+        const name = data.first_name
+        const surname = data.last_name
+        const date = data.birth_date
+
+        dispatch(formPutUSerData({name,surname,date}))
+    }
+
+
+
+
 
     const arrowReturn = () => {
         return navigate(-1)
     }
 
+    // if (status === 'done') {
+    //     return alert("Done")
+    // }
 
     return (
         <div className={styles.profilePage}>
             <Layout/>
             <div className={styles.loginPage__right}>
 
-                <form noValidate className={styles.form}>
+                <form noValidate className={styles.form} onSubmit={handleSubmit(handleSubmitForm)}>
                     <div className={styles.top}>
                         <div className={styles.top__arrowReturn} onClick={arrowReturn}>
                             <svg className={styles.top__arrow} width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -104,10 +133,7 @@ const Profile = () => {
                     </label>
 
                     <label className={styles.form__label}>
-                        <p className={`${styles.register__labelError} ${styles.error__password}`}>
-                            {errors.username && errors.username?.message}
-                        </p>
-                        <input className={styles.form__labelInput} type="text" placeholder="Имя пользователя"/>
+                        <input className={styles.form__labelInput} type="text" placeholder="Username"/>
 
                     </label>
 
@@ -115,7 +141,7 @@ const Profile = () => {
                         <p className={`${styles.register__labelError} ${styles.error__password}`}>
                             {errors.birthday && errors.birthday?.message}
                         </p>
-                        <input {...register("birthday", {
+                        <input {...register("birth_date", {
                             required: {
                                 message: "Напишите дату рождения",
                                 value: true
@@ -130,7 +156,7 @@ const Profile = () => {
 
                     <Link onClick={()=>setModal(true)} className={styles.form__telInput}>Добавьте номер</Link>
 
-                    <TelNumberModal modal={modal} setModal={setModal}>
+                    <TelNumberModal handleSubmit={handleSubmit} modal={modal} setModal={setModal}>
                         <h4 className={styles.modal__title}>Изменить номер телефона</h4>
                         <svg className={styles.modal__svg} width="60" height="60" viewBox="0 0 49 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M42.5 38V34.7081C42.5 33.0725 41.5042 31.6017 39.9856 30.9942L35.9173 29.3669C33.9857 28.5943 31.7844 29.4312 30.854 31.292L30.5 32C30.5 32 25.5 31 21.5 27C17.5 23 16.5 18 16.5 18L17.208 17.646C19.0688 16.7156 19.9057 14.5143 19.1331 12.5827L17.5058 8.51444C16.8983 6.99581 15.4275 6 13.7919 6H10.5C8.29086 6 6.5 7.79086 6.5 10C6.5 27.6731 20.8269 42 38.5 42C40.7091 42 42.5 40.2091 42.5 38Z" fill="white" fillOpacity="0.5" stroke="white" strokeOpacity="0.7" strokeLinejoin="round"/>
@@ -151,13 +177,13 @@ const Profile = () => {
                                     message: "Заполните номер телефона",
                                     value: /^\+996\(\d{3}\)\d{2}-\d{2}-\d{2}$/
                                 }
-                            })} className={`${styles.form__labelInput} ${styles.phone}`} type="tel" placeholder="0(000) 000 000"/>
+                            })} className={`${styles.form__labelInput} ${styles.phone}`} type="tel" placeholder="0(000)00-00-00"/>
 
                         </label>
                         </TelNumberModal>
 
                     <label className={styles.form__label}>
-                        <input className={`${styles.form__labelInput} ${styles.email}`} type="email" placeholder="Электронная почта"/>
+                        <input className={`${styles.form__labelInput} ${styles.email}`} type="email" placeholder="Email"/>
                     </label>
 
                     <button type="submit"

@@ -28,7 +28,9 @@ const Register = () => {
         const username = data.username
         const email = data.email
        dispatch(authUserData({username, email}))
+        console.log(data.username)
     }
+
 
 
     const arrowReturn = () => {
@@ -37,7 +39,7 @@ const Register = () => {
 
 
     if (status === 'done') {
-        return navigate("/")
+        return navigate("/password")
     }
     return (
         <div>
@@ -107,7 +109,7 @@ const Register = () => {
 
                         </label>
 
-                        <button onClick={()=>navigate("/password")} type="submit" className={styles.form__btn}>Далее</button>
+                        <button type="submit" className={styles.form__btn}>Далее</button>
                     </form>
                 </div>
             </div>
