@@ -7,8 +7,8 @@ const instance = axios.create({
 })
 
 instance.interceptors.request.use((config) => {
-    config.headers.Authorization = window.localStorage.getItem("token")
-    config.headers.Authorization = window.localStorage.getItem("tokenRefresh")
+    config.headers.Authorization = "Bearer " + window.localStorage.getItem("tokenRefresh")
+    config.headers.Authorization = "Bearer " + window.localStorage.getItem("token")
     return config
 })
 
@@ -32,7 +32,7 @@ instance.interceptors.response.use(
             try {
                 // запрос на обновление токенов
                 const resp = await instance.post("token/refresh/",{
-                    refresh: window.localStorage.getItem("tokenRefresh")
+                    refresh: "Bearer " + window.localStorage.getItem("tokenRefresh")
                 });
                 // сохраняем новый accessToken в localStorage
                 localStorage.setItem("token", resp.data.token.access);

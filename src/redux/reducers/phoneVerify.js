@@ -8,22 +8,24 @@ import axios from "axios";
 
 export const phoneVerify = createAsyncThunk(
     "post/phoneVerify",
-    async (phone_number,code, {rejectWithValue}) => {
+    async ({phone_number, code}, {rejectWithValue}) => {
         try {
-            const response = await axios.post("http://68.183.79.205:8000/update_phone_number/",{
+            const response = await instance.post("update_phone_number/",{
                 phone_number,
                 code,
+            },
+            {
                 headers: { Authorization: 'Bearer ' +  window.localStorage.getItem("token") }
-            })
-
+            }
+            )
             console.log(response)
-            if (response.statusText !== "OK") {
+
+            if (response.statusText !== "Created") {
                 throw new Error("Ошибка при запросе")
             }
             return response.data
         }catch (err) {
-            // return rejectWithValue(err.message)
-            return console.log("Hello")
+            return rejectWithValue(err.message)
         }
     }
 )

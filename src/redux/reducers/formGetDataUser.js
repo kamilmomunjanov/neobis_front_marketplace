@@ -13,7 +13,7 @@ export const formUserData = createAsyncThunk(
                 headers: { Authorization: 'Bearer ' +  window.localStorage.getItem("token") }
             })
 
-            console.log(response)
+            // console.log(response)
             if (response.statusText !== "OK") {
                 throw new Error("Ошибка при запросе")
             }
@@ -33,9 +33,11 @@ export const formPutUSerData = createAsyncThunk(
                 first_name: name,
                 last_name:surname,
                 birth_date:date,
+            },
+            {
                 headers: { Authorization: 'Bearer ' +  window.localStorage.getItem("token") }
-            })
-            console.log(response)
+            }
+            )
 
             if (response.statusText !== "OK") {
                 throw new Error("Ошибка при запросе")

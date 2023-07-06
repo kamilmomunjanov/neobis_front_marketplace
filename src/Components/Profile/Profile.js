@@ -1,14 +1,12 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState,useEffect, useRef} from 'react';
 import styles from "./Profile.module.css";
 import Layout from "../Layout/Layout";
 import {useForm} from "react-hook-form";
 import {useLocation, useNavigate, Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import InputMask from "react-input-mask";
 import TelNumberModal from "./TelNumberModal";
 import {formPutUSerData, formUserData} from "../../redux/reducers/formGetDataUser";
-import axios from "axios";
-import {loginUserData} from "../../redux/reducers/loginSlice";
+
 
 
 const Profile = () => {
@@ -17,7 +15,9 @@ const Profile = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const location = useLocation()
+    const password = useRef()
     const {data, status, error} = useSelector((store) => store.formSlice)
+
     const {
         register,
         handleSubmit,
@@ -27,30 +27,24 @@ const Profile = () => {
         reset,
         watch
     } = useForm({
-        mode: "onChange"
+        mode: "onChange",
+        values: data,
     })
+
 
     useEffect(()=>{
         dispatch(formUserData())
     },[])
 
-    // useEffect(()=>{
-    //     axios("http://68.183.79.205:8000/form/",{
-    //         headers: { Authorization: 'Bearer ' +  window.localStorage.getItem("token") }
-    //     }).then((res) => console.log(res.data))
-    // },[])
 
     const handleSubmitForm = (data) => {
-        console.log(data)
+
         const name = data.first_name
         const surname = data.last_name
-        const date = data.birth_date
-
+        const month = data.birth_date
+        const date = month.split('-').reverse().join('.')
         dispatch(formPutUSerData({name,surname,date}))
     }
-
-
-
 
 
     const arrowReturn = () => {
@@ -58,7 +52,7 @@ const Profile = () => {
     }
 
     // if (status === 'done') {
-    //     return alert("Done")
+    //     return navigate("/profile")
     // }
 
     return (
@@ -66,7 +60,7 @@ const Profile = () => {
             <Layout/>
             <div className={styles.loginPage__right}>
 
-                <form noValidate className={styles.form} onSubmit={handleSubmit(handleSubmitForm)}>
+                <form ref={password} noValidate className={styles.form} onClick={handleSubmit(handleSubmitForm)}>
                     <div className={styles.top}>
                         <div className={styles.top__arrowReturn} onClick={arrowReturn}>
                             <svg className={styles.top__arrow} width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -134,7 +128,6 @@ const Profile = () => {
 
                     <label className={styles.form__label}>
                         <input className={styles.form__labelInput} type="text" placeholder="Username"/>
-
                     </label>
 
                     <label className={styles.form__label}>
@@ -148,7 +141,8 @@ const Profile = () => {
                             },
                             pattern: {
                                 message: "Напишите правильно свою дату рождения",
-                                value: /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/
+                                // value: /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/,
+                                value: /^\(0[1-9]|[12][0-9]|3[01]\)-(0[1-9]|1[012])-\d{4}$/,
                             }
                         })} className={styles.form__labelInput} type="date" placeholder="Дата рождения"/>
 
@@ -168,11 +162,7 @@ const Profile = () => {
                             <p className={`${styles.register__labelError} ${styles.error__password} ${styles.email__error}`}>
                                 {errors.phone && errors.phone?.message}
                             </p>
-                            <InputMask mask={`+\\9\\96(999)99-99-99`} {...register("phone", {
-                                required: {
-                                    message: "Это поле обязательно",
-                                    value: true
-                                },
+                            <input {...register("phone", {
                                 pattern: {
                                     message: "Заполните номер телефона",
                                     value: /^\+996\(\d{3}\)\d{2}-\d{2}-\d{2}$/

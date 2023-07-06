@@ -28,7 +28,7 @@ export const authUserData = createAsyncThunk(
 const authSlice = createSlice({
     name:"register",
     initialState:{
-        data:null,
+        _data:null,
         status:"",
         error:"",
     },
@@ -43,7 +43,7 @@ const authSlice = createSlice({
             })
             .addCase(authUserData.fulfilled, (state, action) => {
                 state.status = "done"
-                state.data = action.payload
+                state._data = action.payload
             })
             .addCase(authUserData.rejected, (state, action) => {
                 state.status = "error"
