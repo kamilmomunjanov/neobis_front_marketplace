@@ -4,6 +4,7 @@ import passwordSlice from "./reducers/passwordSlice";
 import loginSlice from "./reducers/loginSlice";
 import formSlice from "./reducers/formGetDataUser";
 import phoneSlice from "./reducers/phoneVerify";
+import codeSlice from "./reducers/codeVerifySlice";
 
 const store = configureStore({
     reducer:{
@@ -11,7 +12,8 @@ const store = configureStore({
         passwordSlice,
         loginSlice,
         formSlice,
-        phoneSlice
+        phoneSlice,
+        codeSlice
     }
 })
 

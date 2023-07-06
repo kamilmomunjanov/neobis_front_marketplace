@@ -6,6 +6,9 @@ import Register from "./Components/Register/Register";
 import Password from "./Components/Password/Password";
 import PasswordRepeat from "./Components/Password/PasswordRepeat";
 import Profile from "./Components/Profile/Profile";
+import MyProduct from "./Components/myProduct/MyProduct";
+import MyFavoriteProduct from "./Components/myFavoriteProduct/MyFavoriteProduct";
+import MainPage from "./Components/mainPage/MainPage";
 
 function App() {
 
@@ -19,6 +22,9 @@ function App() {
                 <Route path="/password" element={<Password/>}/>
                 <Route path="/password/repeat" element={<PasswordRepeat/>}/>
                 <Route path="/profile" element={<Profile/>}/>
+                <Route path="/products" element={<MyProduct/>}/>
+                <Route path="/favorite" element={<MyFavoriteProduct/>}/>
+                <Route path="/main" element={<MainPage/>}/>
             </Routes>
         </div>
     );

@@ -2,19 +2,34 @@ import React,{useState} from 'react';
 import { usePinInput, PinInputActions } from 'react-pin-input-hook';
 import "./modal.css";
 import styles from "./Profile.module.css";
+import {useDispatch, useSelector} from "react-redux";
+import {codeVerify} from "../../redux/reducers/codeVerifySlice";
+import {useNavigate} from "react-router-dom";
 
 const CodeVerify = ({modal, setModal}) => {
+
+    const {data, status, error} = useSelector((store) => store.codeSlice)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     const [values, setValues] = useState(Array(4).fill(''))
-    const [error, setError] = useState(false)
     const { fields } = usePinInput({
         values,
         onChange: setValues,
-        error,
+
     })
 
-    const PinInput = usePinInput()
-    console.log("EEEE",PinInput.fields)
+    const codeSend = (e) => {
+        e.preventDefault()
+        const code = values.join("")
+        dispatch(codeVerify({code}))
+    }
+    console.log(values.join(""))
 
+
+
+    // if (status === 'done') {
+    //     return navigate("/profile")
+    // }
 
     return (
         <div className={modal ? "modal active" : "modal"} onClick={()=>setModal(false)}>
@@ -37,7 +52,7 @@ const CodeVerify = ({modal, setModal}) => {
                     </div>
 
 
-                <button className="modal__btn">Далее</button>
+                <button onClick={codeSend} className="modal__btn">Далее</button>
             </div>
         </div>
     );

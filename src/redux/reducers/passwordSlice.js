@@ -4,9 +4,9 @@ import instance from "../../axios";
 
 export const passwordRegister = createAsyncThunk(
     "put/passwordRegister",
-    async ({password1, password2}, {rejectWithValue}) => {
+    async ({password1, password2,user_id}, {rejectWithValue}) => {
         try {
-            const response = await instance.put(`/30/set_password/`, {
+            const response = await instance.put(`/${user_id}/set_password/`, {
                     password1,
                     password2,
                 // headers: { Authorization: 'Bearer ' +  window.localStorage.getItem("token") }

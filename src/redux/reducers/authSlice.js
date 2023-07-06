@@ -17,6 +17,7 @@ export const authUserData = createAsyncThunk(
             }
 
             return response.data
+            window.localStorage.setItem("user_id", response.data.user_id)
 
         }catch (err) {
             return rejectWithValue(err.message)

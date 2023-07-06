@@ -18,40 +18,17 @@ export const phoneVerify = createAsyncThunk(
                 headers: { Authorization: 'Bearer ' +  window.localStorage.getItem("token") }
             }
             )
-            console.log(response)
 
             if (response.statusText !== "Created") {
                 throw new Error("Ошибка при запросе")
             }
             return response.data
+            window.localStorage.setItem("phone", response.data.phone_number)
         }catch (err) {
             return rejectWithValue(err.message)
         }
     }
 )
-
-// export const formPutUSerData = createAsyncThunk(
-//     "put/formPutData",
-//     async ({name,surname,date}, {rejectWithValue}) => {
-//         try {
-//             const response = await instance.put("form/", {
-//                 first_name: name,
-//                 last_name:surname,
-//                 birth_date:date,
-//                 headers: { Authorization: 'Bearer ' +  window.localStorage.getItem("token") }
-//             })
-//             console.log(response)
-//
-//             if (response.statusText !== "OK") {
-//                 throw new Error("Ошибка при запросе")
-//             }
-//             return response.data
-//
-//         } catch (err) {
-//             return rejectWithValue(err.message)
-//         }
-//     }
-// )
 
 
 const phoneSlice = createSlice({
@@ -77,18 +54,6 @@ const phoneSlice = createSlice({
                 state.status = "error"
                 state.error = action.payload
             })
-            // .addCase(formPutUSerData.pending, (state, action) => {
-            //     state.status = "loading"
-            //     state.error = ""
-            // })
-            // .addCase(formPutUSerData.fulfilled, (state, action) => {
-            //     state.status = "done"
-            //     state.data = action.payload
-            // })
-            // .addCase(formPutUSerData.rejected, (state, action) => {
-            //     state.status = "error"
-            //     state.error = action.payload
-            // })
     }
 })
 

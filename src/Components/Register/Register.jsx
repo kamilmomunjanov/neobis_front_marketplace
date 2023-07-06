@@ -27,7 +27,8 @@ const Register = () => {
     const handleSubmitRegister = (data) => {
         const username = data.username
         const email = data.email
-       dispatch(authUserData({username, email}))
+        const user_id = window.localStorage.getItem("user_id")
+       dispatch(authUserData({username, email,user_id}))
         console.log(data.username)
     }
 

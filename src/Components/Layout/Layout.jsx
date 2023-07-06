@@ -1,7 +1,10 @@
 import React from 'react';
 import styles from "./Layout.module.css";
+import {Link, useLocation} from "react-router-dom";
 
 const Layout = () => {
+
+    const location = useLocation()
     return (
         <div className={styles.tabBar}>
             <div className={styles.tab__profile}>
@@ -15,8 +18,8 @@ const Layout = () => {
                     </g>
                 </svg>
                 <div className={styles.tab__userInfo}>
-                    <h3 className={styles.tab__userTitle}>Алесястар</h3>
-                    <p className={styles.tab__userSubTitle}>sergeykrash01</p>
+                    <Link to="/profile" className={styles.tab__userTitle}>Алесястар</Link>
+                    <Link to="/profile" className={styles.tab__userSubTitle}>sergeykrash01</Link>
                 </div>
             </div>
 
@@ -32,7 +35,7 @@ const Layout = () => {
                             </g>
                         </g>
                     </svg>
-                    <p className={styles.tab__text}>Понравившиеся</p>
+                    <Link to="/favorite" className={styles.tab__text}>Понравившиеся</Link>
                 </div>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="Huge-icon/arrows/outline/direction-right 01">
@@ -54,7 +57,7 @@ const Layout = () => {
                         </g>
                     </svg>
 
-                    <p className={styles.tab__text}>Мои товары</p>
+                    <Link to="/products" className={styles.tab__text}>Мои товары</Link>
                 </div>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="Huge-icon/arrows/outline/direction-right 01">
@@ -75,7 +78,7 @@ const Layout = () => {
                             </g>
                         </g>
                     </svg>
-                    <p className={styles.tab__text}>Главная страница</p>
+                    <Link to="/main" className={styles.tab__text}>Главная страница</Link>
                 </div>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="Huge-icon/arrows/outline/direction-right 01">
