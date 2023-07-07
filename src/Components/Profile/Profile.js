@@ -29,6 +29,7 @@ const Profile = () => {
     } = useForm({
         mode: "onChange",
         values: data,
+        defaultValues: data
     })
 
 
@@ -127,7 +128,7 @@ const Profile = () => {
                     </label>
 
                     <label className={styles.form__label}>
-                        <input className={styles.form__labelInput} type="text" placeholder="Username"/>
+                        <input {...register('username')} className={styles.form__labelInput} type="text" placeholder="Username"/>
                     </label>
 
                     <label className={styles.form__label}>
@@ -173,7 +174,7 @@ const Profile = () => {
                         </TelNumberModal>
 
                     <label className={styles.form__label}>
-                        <input className={`${styles.form__labelInput} ${styles.email}`} type="email" placeholder="Email"/>
+                        <input {...register("email")} className={`${styles.form__labelInput} ${styles.email}`} type="email" placeholder="Email"/>
                     </label>
 
                     <button type="submit"

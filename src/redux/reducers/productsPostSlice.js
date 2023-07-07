@@ -4,16 +4,13 @@ import instance from "../../axios";
 
 export const productPost = createAsyncThunk(
     "post/productSlice",
-    async ({ title, price, short_description, long_description, user_id}, {rejectWithValue}) => {
+    async (formData, {rejectWithValue}) => {
         try {
-            const response = await instance.post("products/", {
-                    title, price, short_description, long_description
-                },
+            const response = await instance.post("products/", formData,
                 {
                     headers: {Authorization: 'Bearer ' + window.localStorage.getItem("token")}
                 }
             )
-
 
             console.log(response.data)
             if (response.statusText !== "Created") {
@@ -32,7 +29,7 @@ export const productPost = createAsyncThunk(
 const productSlice = createSlice({
     name: "product",
     initialState: {
-        data: null,
+        _data: null,
         status: "",
         error: "",
     },
@@ -45,7 +42,7 @@ const productSlice = createSlice({
             })
             .addCase(productPost.fulfilled, (state, action) => {
                 state.status = "done"
-                state.data = action.payload
+                state._data = action.payload
             })
             .addCase(productPost.rejected, (state, action) => {
                 state.status = "error"

@@ -106,9 +106,15 @@
     display: flex;
     flex-direction: column;
     row-gap: 5px;
+    width: 154px;
+    overflow-wrap: break-word ;
 }
 .card__likes{
     display: flex;
     align-items: center;
     column-gap: 5px;
+}
+
+.cardText{
+
 }

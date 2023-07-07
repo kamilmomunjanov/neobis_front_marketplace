@@ -13,7 +13,7 @@ export const formUserData = createAsyncThunk(
                 headers: { Authorization: 'Bearer ' +  window.localStorage.getItem("token") }
             })
 
-            // console.log(response)
+            console.log(response.data)
             if (response.statusText !== "OK") {
                 throw new Error("Ошибка при запросе")
             }

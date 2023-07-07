@@ -38,6 +38,11 @@
     transform: scale(1);
 }
 
+.modal__image{
+    display: flex;
+    column-gap: 12px;
+}
+
 .modalImage{
     display: flex;
     flex-direction: column;
@@ -105,5 +110,11 @@
     border-radius: 16px;
     background: #F7F6F9;
     color: #9CA4AB;
+}
+
+.img{
+    width: 100px;
+    height: 85px;
+    border-radius: 8px;
 }
 
