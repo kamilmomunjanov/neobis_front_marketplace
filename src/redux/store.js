@@ -5,6 +5,8 @@ import loginSlice from "./reducers/loginSlice";
 import formSlice from "./reducers/formGetDataUser";
 import phoneSlice from "./reducers/phoneVerify";
 import codeSlice from "./reducers/codeVerifySlice";
+import productSlice from "./reducers/productsPostSlice";
+import productGetSlice from "./reducers/productGetSlice";
 
 const store = configureStore({
     reducer:{
@@ -13,7 +15,9 @@ const store = configureStore({
         loginSlice,
         formSlice,
         phoneSlice,
-        codeSlice
+        codeSlice,
+        productSlice,
+        productGetSlice
     }
 })
 
