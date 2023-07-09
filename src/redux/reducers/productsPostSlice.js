@@ -3,7 +3,7 @@ import instance from "../../axios";
 
 
 export const productPost = createAsyncThunk(
-    "post/productSlice",
+    "product/productSlice",
     async (formData, {rejectWithValue}) => {
         try {
             const response = await instance.post("products/", formData,

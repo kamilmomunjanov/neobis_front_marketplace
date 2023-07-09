@@ -5,6 +5,8 @@ import styles from "./Profile.module.css";
 import {useDispatch, useSelector} from "react-redux";
 import {codeVerify} from "../../redux/reducers/codeVerifySlice";
 import {useNavigate} from "react-router-dom";
+import Profile from "./Profile";
+import {statusChange} from "../../redux/reducers/phoneVerify";
 
 const CodeVerify = ({modal, setModal}) => {
 
@@ -18,18 +20,21 @@ const CodeVerify = ({modal, setModal}) => {
 
     })
 
-    const codeSend = (e) => {
+    const codeSend = async(e) => {
         e.preventDefault()
         const code = values.join("")
-        dispatch(codeVerify({code}))
+       await dispatch(codeVerify({code}))
+        if(status === "done") {
+       await setModal(false)
+            await setValues(["","","",""])
+            await dispatch(statusChange())
+        }
     }
     console.log(values.join(""))
 
 
 
-    // if (status === 'done') {
-    //     return navigate("/profile")
-    // }
+
 
     return (
         <div className={modal ? "modal active" : "modal"} onClick={()=>setModal(false)}>

@@ -3,7 +3,7 @@ import instance from "../../axios";
 
 
 export const passwordRegister = createAsyncThunk(
-    "put/passwordRegister",
+    "password/passwordRegister",
     async ({password1, password2,user_id}, {rejectWithValue}) => {
         try {
             const response = await instance.put(`/${user_id}/set_password/`, {

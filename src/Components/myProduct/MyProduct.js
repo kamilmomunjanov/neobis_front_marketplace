@@ -1,9 +1,23 @@
-import React from 'react';
+import React,{useEffect, useState} from 'react';
 import styles from "../Profile/Profile.module.css";
 import Layout from "../Layout/Layout";
 import create from "./myProduct.module.css";
+import style from "../mainPage/mainPage.module.css";
+import {useDispatch, useSelector} from "react-redux";
+import {myProductGet} from "../../redux/reducers/myProductSlice";
+import SettingsModal from "./SettingsModal";
+import MyOneProducts from "./MyOneProducts";
 
 const MyProduct = () => {
+    const dispatch = useDispatch()
+
+    const user = useSelector((store) => store.authSlice)
+    const {data, status, error} = useSelector((store) => store.myProductGetSlice)
+
+    useEffect(()=>{
+        dispatch(myProductGet())
+    },[])
+
     return (
         <div className={styles.profilePage}>
             <Layout/>
@@ -21,27 +35,16 @@ const MyProduct = () => {
                         <h2 className={styles.title__register}>Мои товары</h2>
                     </div>
 
-                    <div className={create.content}>
-                        <div>
-                            <h4>BMW M4 Coupe: A Two-Door</h4>
-                            <p>23 000 $</p>
-                            <p>100</p>
-                        </div>
-                        <div>
-                            <h4>BMW M4 Coupe: A Two-Door</h4>
-                            <p>23 000 $</p>
-                            <p>100</p>
-                        </div>
-                        <div>
-                            <h4>BMW M4 Coupe: A Two-Door</h4>
-                            <p>23 000 $</p>
-                            <p>100</p>
-                        </div>
-                        <div>
-                            <h4>BMW M4 Coupe: A Two-Door</h4>
-                            <p>23 000 $</p>
-                            <p>100</p>
-                        </div>
+                    <div className={create.contentDisplay}>
+                        {
+                            data !== null && data !== undefined ? data.map((item, index) => (
+                                    <React.Fragment key={item.id}>
+                                        <MyOneProducts item={item}/>
+                                    </React.Fragment>
+                                ))
+                                : ""
+
+                        }
                     </div>
                 </div>
             </div>

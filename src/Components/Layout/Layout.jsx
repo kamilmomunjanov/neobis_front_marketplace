@@ -1,10 +1,18 @@
 import React from 'react';
 import styles from "./Layout.module.css";
-import {Link, useLocation} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {logoutUser} from "../../redux/reducers/loginSlice";
 
 const Layout = () => {
 
     const location = useLocation()
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const logOut = () => {
+        dispatch(logoutUser())
+        navigate("/")
+    }
     return (
         <div className={styles.tabBar}>
             <div className={styles.tab__profile}>
@@ -99,7 +107,7 @@ const Layout = () => {
                             </g>
                         </g>
                     </svg>
-                    <p className={styles.tab__text}>Выйти</p>
+                    <p onClick={logOut} className={styles.tab__text}>Выйти</p>
                 </div>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="Huge-icon/arrows/outline/direction-right 01">

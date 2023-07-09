@@ -33,6 +33,7 @@ const Login = () => {
         const username = data.username
         const password = data.password
         const dataLogin = dispatch(loginUserData({username, password}))
+        navigate("/profile")
         if ("token" in dataLogin) {
             window.localStorage.setItem("token", data.token)
         }else if(!data){
@@ -49,9 +50,6 @@ const Login = () => {
     // if (status === 'done') {
     //     return <Navigate to='/'/>
     // }
-    if (status === 'done') {
-        return navigate("/profile")
-    }
 
     return (
         <div className="loginPage">

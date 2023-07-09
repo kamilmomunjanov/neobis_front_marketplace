@@ -1,6 +1,131 @@
 
-.content{
+.content {
     display: flex;
     column-gap: 30px;
     margin-top: 40px;
+}
+
+.contentDisplay {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 12px;
+    row-gap: 40px;
+}
+
+.content__card {
+    background-color: white;
+    padding: 6px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    width: 154px;
+    overflow-wrap: break-word;
+    position: relative;
+}
+
+.cardImg {
+    width: 142px;
+    height: 85px;
+    border-radius: 8px;
+}
+
+.card__likes {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+}
+
+.content__settings {
+    display: none;
+}
+
+.content__settingsActive {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+    position: absolute;
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+    bottom: -30px;
+    right: -80px;
+    z-index: 1;
+    border: 1px solid #8400ff;
+}
+
+
+.card__change {
+    display: flex;
+    column-gap: 12px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.cardSvg {
+    width: 24px;
+    height: 24px;
+    background-color: blue;
+    padding: 2px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cardLikes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cardText {
+    color: #494949;
+    font-family: Gotham Pro, sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 24px;
+}
+
+.cardTitle {
+    color: #000;
+    font-family: Gotham Pro, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 120%;
+}
+
+.cardSubtitle {
+    color: #5D5FEF;
+    font-family: Gotham Pro, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 120%;
+}
+
+.cardLikes {
+    color: #C1C1C1;
+    font-family: Gotham Pro, sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: bold;
+    line-height: normal;
+}
+
+.settingsButton {
+    cursor: pointer;
+}
+
+.close{
+    cursor: pointer;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    border-color: deepskyblue;
+    font-weight: bold;
+    background-color: cornflowerblue;
+    position: absolute;
+    top: -10px;
+    right: -10px;
 }

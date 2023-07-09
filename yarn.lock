@@ -7863,6 +7863,11 @@ redent@^3.0.0:
     indent-string "^4.0.0"
     strip-indent "^3.0.0"
 
+redux-remember@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/redux-remember/-/redux-remember-3.3.1.tgz#fad0b3af81458d8e40a54cd30be148c17e40bda9"
+  integrity sha512-x30eZpdryapH8+hinYcyoTiGCSmtPUPdvL7OxjpMeRgTckJrVW57FgRAmiv41COqi/q4H+qn65Uftsasqj+F9A==
+
 redux-thunk@^2.4.2:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.4.2.tgz#b9d05d11994b99f7a91ea223e8b04cf0afa5ef3b"

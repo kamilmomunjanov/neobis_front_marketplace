@@ -5,7 +5,7 @@ import instance from "../../axios";
 
 
 export const loginUserData = createAsyncThunk(
-    "post/loginUserData",
+    "login/loginUserData",
     async ({username, password}, {rejectWithValue}) => {
         try {
             const response = await instance.post("login/",{
@@ -18,9 +18,10 @@ export const loginUserData = createAsyncThunk(
             if (response.statusText !== "OK") {
                 throw new Error("Ошибка при запросе")
             }
-            return  [window.localStorage.setItem("token", response.data.token.access),
-                window.localStorage.setItem("tokenRefresh", response.data.token.refresh), response.data ]
 
+             window.localStorage.setItem("token", response.data.token.access)
+             window.localStorage.setItem("tokenRefresh", response.data.token.refresh)
+            return  response.data
 
         }catch (err) {
             return rejectWithValue(err.message)
@@ -37,6 +38,9 @@ const loginSlice = createSlice({
         error:"",
     },
     reducers:{
+        logoutUser: (state, action) => {
+            state.data = null
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -57,5 +61,5 @@ const loginSlice = createSlice({
 
 
 
-export const {} = loginSlice.actions;
+export const {logoutUser} = loginSlice.actions;
 export default  loginSlice.reducer;

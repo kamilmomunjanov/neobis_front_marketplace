@@ -6,7 +6,7 @@ import axios from "axios";
 
 
 export const formUserData = createAsyncThunk(
-    "get/formUserData",
+    "form/formUserData",
     async (_, {rejectWithValue}) => {
         try {
             const response = await axios("http://68.183.79.205:8000/form/",{

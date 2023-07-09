@@ -10,6 +10,7 @@ import {passwordRegister} from "../../redux/reducers/passwordSlice";
 const Password = () => {
     const [passwordView, setPasswordView] = useState(false)
     const {data, status, error} = useSelector((store) => store.passwordSlice)
+    const user = useSelector((store) => store.authSlice)
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const location = useLocation()
@@ -32,7 +33,8 @@ const Password = () => {
     const handleSubmitPassword = (data) => {
         const password1 = data.password
         const password2 = data.passwordRepeat
-        dispatch(passwordRegister({password1, password2}))
+
+        dispatch(passwordRegister({password1, password2, user_id: user._data.user_id}))
     }
 
     const viewPassword = () => {

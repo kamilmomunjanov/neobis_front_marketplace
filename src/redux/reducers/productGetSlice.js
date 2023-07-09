@@ -3,7 +3,7 @@ import instance from "../../axios";
 
 
 export const productGet = createAsyncThunk(
-    "post/productGetSlice",
+    "productGet/productGetSlice",
     async (_, {rejectWithValue}) => {
         try {
             const response = await instance("products/",

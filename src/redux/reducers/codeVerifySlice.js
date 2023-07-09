@@ -4,7 +4,7 @@ import {phoneVerify} from "./phoneVerify";
 
 
 export const codeVerify = createAsyncThunk(
-    "post/codeVerify",
+    "code/codeVerify",
     async ({code}, {rejectWithValue}) => {
         try {
             const response = await instance.post(`verify_code/${window.localStorage.getItem("phone")}`,{

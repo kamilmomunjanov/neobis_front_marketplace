@@ -7,7 +7,7 @@ import axios from "axios";
 
 
 export const phoneVerify = createAsyncThunk(
-    "post/phoneVerify",
+    "phone/phoneVerify",
     async ({phone_number, code}, {rejectWithValue}) => {
         try {
             const response = await instance.post("update_phone_number/",{
@@ -22,8 +22,9 @@ export const phoneVerify = createAsyncThunk(
             if (response.statusText !== "Created") {
                 throw new Error("Ошибка при запросе")
             }
-            return response.data
             window.localStorage.setItem("phone", response.data.phone_number)
+            return response.data
+
         }catch (err) {
             return rejectWithValue(err.message)
         }
@@ -39,6 +40,9 @@ const phoneSlice = createSlice({
         error:"",
     },
     reducers:{
+        statusChange: (state, action)=>{
+            state.status = ""
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -59,5 +63,5 @@ const phoneSlice = createSlice({
 
 
 
-export const {} = phoneSlice.actions;
+export const {statusChange} = phoneSlice.actions;
 export default  phoneSlice.reducer;
